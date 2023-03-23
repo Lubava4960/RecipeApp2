@@ -1,5 +1,6 @@
 package com.example.recipeapp2.controllers;
 
+import com.example.recipeapp2.service.FilesService;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -14,8 +15,7 @@ import java.io.FileNotFoundException;
 
 @RestController
 @RequestMapping("/files")
-
-public class FilesController {
+class FilesController {
     private final FilesService filesService;
 
     public FilesController(FilesService filesService) {
