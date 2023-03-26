@@ -1,5 +1,14 @@
 package com.example.recipeapp2.controllers;
 
+import com.example.recipeapp2.dto.RecipeDTO;
+import com.example.recipeapp2.model.Recipe;
+import com.example.recipeapp2.service.RecipeService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
 @RestController
 
 @RequestMapping("/recipe")
@@ -19,11 +28,11 @@ public class RecipeController {
             description = "Получение всех рецептов"
     )
 
-    public List<RecipeDTO>getRecipes(){
+    public List<RecipeDTO> getRecipes(){
 
         return recipeService.getAllRecipes();
     }
-    @GetMapping ("/{id}")
+    @GetMapping("/{id}")
 
 
     @Operation(
@@ -36,7 +45,7 @@ public class RecipeController {
     }
     @PostMapping
     @Operation(
-            description = "ВОзможно добавить рецпты"
+            description = "Возможно добавить рецепты"
     )
     public RecipeDTO addRecipe(@RequestBody Recipe recipe){
         return recipeService.addRecipe(recipe);
@@ -48,7 +57,7 @@ public class RecipeController {
             summary = "Редактирование рецепта",
             description = "Возможно по id "
     )
-    public   RecipeDTO editRecipe(@PathVariable("id") int id,@RequestBody Recipe recipe){
+    public   RecipeDTO editRecipe(@PathVariable("id") int id, @RequestBody Recipe recipe){
         return RecipeService.updateRecipe(id, recipe);
     }
     @DeleteMapping("/{id}")

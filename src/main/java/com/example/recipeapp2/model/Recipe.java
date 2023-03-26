@@ -12,10 +12,10 @@ public class Recipe {
     public int getCookingTime;
     private String title;
     private int cookingTime;
-    private List<ingredient> ingredients;
+    private List<Ingredient> ingredients;
     private List<String> steps;
 
-    public Recipe(String title, int cookingTime, List<ingredient> ingredients, List<String> steps) {
+    public Recipe(String title, int cookingTime, List<Ingredient> ingredients, List<String> steps) {
         this.title = title;
         this.cookingTime = cookingTime;
         this.ingredients = ingredients;
@@ -38,11 +38,11 @@ public class Recipe {
         this.cookingTime = cookingTime;
     }
 
-    public List<ingredient> getIngredients() {
+    public List<Ingredient> getIngredients() {
         return ingredients;
     }
 
-    public void setIngredients(List<ingredient> ingredients) {
+    public void setIngredients(List<Ingredient> ingredients) {
         this.ingredients = ingredients;
     }
 

@@ -9,13 +9,18 @@ public interface FilesService {
 
     boolean cleanDataFile();
 
+    boolean saveToFile(String json);
+
     String readFromFile() throws IOException;
 
-    static void saveToFile(String json, Map<Integer, Ingredient> ingredients) {
-    }
+  void saveToFile(String json, Map<Integer, Ingredient> ingredients);
+
+
     boolean cleanIngredientFile();
 
     File getDataFile();
 
+    boolean saveToIngredientFile(String json);
 
+    String readFromIngredientFile();
 }

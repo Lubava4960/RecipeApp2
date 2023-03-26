@@ -1,5 +1,10 @@
 package com.example.recipeapp2.controllers;
 
+import com.example.recipeapp2.dto.IngredientDTO;
+import com.example.recipeapp2.service.Ingredient;
+import com.example.recipeapp2.service.IngredientService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

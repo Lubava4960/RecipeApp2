@@ -1,5 +1,6 @@
 package com.example.recipeapp2.service;
 
+import com.example.recipeapp2.dto.IngredientDTO;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -10,15 +11,16 @@ import java.util.Map;
 @Service
 public class IngredientService {
     private static final String STORE_FILE_NAME = "ingredients";
-    public FilesService filesService;
+    private FilesService filesService;
     private int idCounter = 0;
-    static final Map<Integer, Ingredient> ingredients = new HashMap<>();
+    private static final Map<Integer, Ingredient> ingredients = new HashMap<>();
+
     public IngredientService(FilesService filesService) {
         this.filesService = filesService;
 
     }
     public static IngredientDTO updateIngredient(int id, Ingredient ingredient) {
-        Ingredient existingIngredient = ingredient.getIngredient(id);
+        IngredientDTO existingIngredient = ingredient.get(id);
         if(existingIngredient==null){
             throw new IngredientNotFoundException();
         }
@@ -47,7 +49,7 @@ public class IngredientService {
         Ingredient existingIngredient=ingredients.remove(id);
         FilesService.saveToFile(STORE_FILE_NAME, ingredients);
         if (existingIngredient==null){
-            throw new ingredientNotFoundException();
+            throw new IngredientNotFoundException();
         }
         return IngredientDTO.from(id, existingIngredient);
     }
@@ -60,7 +62,6 @@ public class IngredientService {
         }
         return result;
     }
-
 
 
 

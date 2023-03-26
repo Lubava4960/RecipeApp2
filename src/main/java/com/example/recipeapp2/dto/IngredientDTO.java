@@ -1,6 +1,9 @@
 package com.example.recipeapp2.dto;
 
+import com.example.recipeapp2.service.Ingredient;
+
 import java.util.List;
+
 
 public class IngredientDTO {
 
@@ -9,7 +12,7 @@ public class IngredientDTO {
     private final int number;
 
     private final String measure;
-    private List<ingredient> ingredients;
+    private List<Ingredient> ingredients;
 
     public IngredientDTO(int id, String title, int number, String measure) {
         this.id = id;
@@ -18,8 +21,6 @@ public class IngredientDTO {
         this.measure = measure;
         this.ingredients = ingredients;
     }
-
-
 
 
     public int getId() {
@@ -38,7 +39,8 @@ public class IngredientDTO {
         return measure;
     }
 
-    public List<ingredient> getIngredients() {
+    public List<Ingredient> getIngredients() {
+
         return ingredients;
     }
 
