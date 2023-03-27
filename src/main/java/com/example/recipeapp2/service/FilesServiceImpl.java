@@ -1,11 +1,14 @@
 package com.example.recipeapp2.service;
 
+import com.example.recipeapp2.model.Recipe;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Map;
 
 @Service
 public abstract class FilesServiceImpl implements FilesService {
@@ -25,7 +28,7 @@ public abstract class FilesServiceImpl implements FilesService {
     @Value("${name.of.ingredient.file")
     private String ingredientFileName;
 
-  @Override
+    @Override
     public boolean cleanDataFile() {
         try {
             Path path = Path.of(dataFilePath, dataFileName);
@@ -36,8 +39,9 @@ public abstract class FilesServiceImpl implements FilesService {
         }
         return false;
     }
-  @Override
-    public boolean saveToFile(String json) {
+
+    @Override
+    public boolean saveToFileRecipes(String json) {
         try {
             cleanDataFile();
             Files.writeString(Path.of(dataFilePath, dataFileName), json);
@@ -46,27 +50,57 @@ public abstract class FilesServiceImpl implements FilesService {
         }
         return false;
     }
-   @Override
-    public String readFromFile(){
-        try{
-            return Files.readString(Path.of(dataFilePath,dataFileName));//чтение
-        }catch(IOException e){
+
+    @Override
+    public String readFromFile() {
+        try {
+            return Files.readString(Path.of(dataFilePath, dataFileName));//чтение
+        } catch (IOException e) {
             throw new RuntimeException(e);
 
         }
 
     }
     @Override
+    public void saveToFileIngredients(String json, Map<Integer, Ingredient> ingredients) {
+        try {
+            cleanIngredientFile();
+            Files.writeString(Path.of(ingredientFilePath, ingredientFileName), json);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+        // todo: надо реализовать
+
+
+    @Override
+    public void saveToFileRecipes(String json, Map<Integer, Recipe> recipes) {
+        try {
+            cleanDataFile();
+            Files.writeString(Path.of(dataFilePath, dataFileName), json);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }// todo: надо реализовать
+
+    @Override
     public boolean cleanIngredientFile() {
         try {
             Path path = Path.of(ingredientFilePath, ingredientFileName);
             Files.deleteIfExists(path);
             Files.createFile(path);
-        }catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return false;
     }
+    @Override
+    public File getDataFile(String json) {
+        Path path = Path.of(dataFilePath, dataFileName);
+        return null;
+    }
+    // todo: надо реализовать
     @Override
     public boolean saveToIngredientFile(String json) {
         try {
@@ -78,17 +112,15 @@ public abstract class FilesServiceImpl implements FilesService {
         return false;
     }
 
-
     @Override
-    public String readFromIngredientFile(){
-        try{
-            return Files.readString(Path.of(ingredientFilePath,ingredientFileName));//чтение
-        }catch(IOException e){
+    public String readFromIngredientFile() {
+        try {
+            return Files.readString(Path.of(ingredientFilePath, ingredientFileName));//чтение
+        } catch (IOException e) {
             throw new RuntimeException(e);
 
         }
 
+
     }
-
-
 }

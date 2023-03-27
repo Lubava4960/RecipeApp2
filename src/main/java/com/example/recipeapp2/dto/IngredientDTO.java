@@ -3,8 +3,6 @@ package com.example.recipeapp2.dto;
 import com.example.recipeapp2.service.Ingredient;
 
 import java.util.List;
-
-
 public class IngredientDTO {
 
     private final int id;
@@ -12,16 +10,20 @@ public class IngredientDTO {
     private final int number;
 
     private final String measure;
-    private List<Ingredient> ingredients;
+    private static List<Ingredient> ingredients;
 
     public IngredientDTO(int id, String title, int number, String measure) {
         this.id = id;
         this.title = title;
         this.number = number;
         this.measure = measure;
-        this.ingredients = ingredients;
+
     }
 
+    public List<Ingredient> getIngredients() {
+
+        return ingredients;
+    }
 
     public int getId() {
         return id;
@@ -39,14 +41,15 @@ public class IngredientDTO {
         return measure;
     }
 
-    public List<Ingredient> getIngredients() {
-
-        return ingredients;
-    }
-
     public static IngredientDTO from(int id, Ingredient ingredient){
-        return new IngredientDTO(id, ingredient.title(), ingredient.number(), ingredient.measure());
+        return new IngredientDTO (id, ingredient.getTitle(), ingredient.getNumber(), ingredient.getMeasure());
+
     }
+
+
+
+
+
 
 }
 

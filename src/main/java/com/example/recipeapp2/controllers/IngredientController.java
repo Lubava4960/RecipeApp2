@@ -19,9 +19,6 @@ public class IngredientController {
     private final IngredientService ingredientService;
 
 
-
-
-
     public IngredientController(IngredientService ingredientService) {
 
         this.ingredientService = ingredientService;
@@ -67,7 +64,7 @@ public class IngredientController {
             description = "Можно редактировать по id"
     )
     public IngredientDTO editIngredient(@PathVariable("id") int id, @RequestBody Ingredient ingredient){
-        return IngredientService.updateIngredient(id, ingredient);
+        return ingredientService.updateIngredient(id, ingredient);
     }
 
 
