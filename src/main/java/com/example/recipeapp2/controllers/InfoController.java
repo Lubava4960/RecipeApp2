@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDate;
-import java.time.Month;
+
 
 @RestController
 @RequestMapping
@@ -22,6 +22,7 @@ public class InfoController {
 
     @GetMapping("/info")
     public InfoDTO info() {
+
         return INFO;
     }
 

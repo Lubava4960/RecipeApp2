@@ -23,7 +23,7 @@ class FilesController {
     }
     @GetMapping("/export")
 
-    public ResponseEntity<InputStreamResource> dowloadDataFile() throws FileNotFoundException {
+    public ResponseEntity<InputStreamResource> downloadDataFile() throws FileNotFoundException {
         File file = filesService.getDataFile();
         if(file.exists()){
             InputStreamResource resource = new InputStreamResource(new FileInputStream(file));

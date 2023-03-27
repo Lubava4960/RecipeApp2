@@ -58,7 +58,7 @@ public class RecipeController {
             description = "Возможно по id "
     )
     public   RecipeDTO editRecipe(@PathVariable("id") int id, @RequestBody Recipe recipe){
-        return RecipeService.updateRecipe(id, recipe);
+        return recipeService.updateRecipe(id, recipe);
     }
     @DeleteMapping("/{id}")
     @Operation(

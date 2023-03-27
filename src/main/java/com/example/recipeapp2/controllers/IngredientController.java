@@ -1,7 +1,7 @@
 package com.example.recipeapp2.controllers;
 
 import com.example.recipeapp2.dto.IngredientDTO;
-import com.example.recipeapp2.service.Ingredient;
+import com.example.recipeapp2.model.Ingredient;
 import com.example.recipeapp2.service.IngredientService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -17,9 +17,6 @@ import java.util.List;
 
 public class IngredientController {
     private final IngredientService ingredientService;
-
-
-
 
 
     public IngredientController(IngredientService ingredientService) {
@@ -67,7 +64,7 @@ public class IngredientController {
             description = "Можно редактировать по id"
     )
     public IngredientDTO editIngredient(@PathVariable("id") int id, @RequestBody Ingredient ingredient){
-        return IngredientService.updateIngredient(id, ingredient);
+        return ingredientService.updateIngredient(id, ingredient);
     }
 
 

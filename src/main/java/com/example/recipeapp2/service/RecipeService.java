@@ -45,14 +45,14 @@ public class RecipeService {
         return result;
     }
 
-    public static RecipeDTO updateRecipe(int id, Recipe recipe) {
+    public RecipeDTO updateRecipe(int id, Recipe recipe) {
         Recipe existingRecipe = recipes.get(id);
-        FilesService.saveToFile(STORE_FILE_NAME,recipes);
+        filesService.saveToFileRecipes(STORE_FILE_NAME,recipes);
         if (existingRecipe == null) {
             throw new RecipeNotFoundException();
         }
         recipes.put(id, recipe);
-        FilesService.saveToFile(STORE_FILE_NAME,recipes);
+        filesService.saveToFileRecipes(STORE_FILE_NAME,recipes);
         return RecipeDTO.from(id, recipe);
     }
 
@@ -75,7 +75,7 @@ public class RecipeService {
     private boolean saveToFile(String storeFileName, Map<Integer, Recipe> recipes){
         try {
             String json = new ObjectMapper().writeValueAsString(RecipeService.recipes);
-            FilesService.saveToFile(json, RecipeService.recipes);
+            filesService.saveToFileRecipes(json, recipes);
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }
@@ -94,7 +94,6 @@ public class RecipeService {
     private void init() throws IOException {
         readFromFile();
     }
-
 
 
 }
