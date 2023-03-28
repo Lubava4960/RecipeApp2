@@ -1,6 +1,7 @@
 package com.example.recipeapp2.service;
 
 import com.example.recipeapp2.model.Ingredient;
+
 import com.example.recipeapp2.model.Recipe;
 
 import java.io.File;
@@ -27,7 +28,6 @@ public interface FilesService {
     File getDataFile();
 
     File getDataFile(String json);
-
     boolean saveToIngredientFile(String json);
 
     String readFromIngredientFile();

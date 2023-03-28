@@ -9,18 +9,11 @@ import java.util.List;
 @NoArgsConstructor
 
 public class Recipe {
-    public int getCookingTime;
-    private String title;
-    private int cookingTime;
-    private List<Ingredient> ingredients;
-    private List<String> steps;
 
-    public Recipe(String title, int cookingTime, List<Ingredient> ingredients, List<String> steps) {
-        this.title = title;
-        this.cookingTime = cookingTime;
-        this.ingredients = ingredients;
-        this.steps = steps;
-    }
+    private String title;
+    private  int cookingTime;
+    private  List<Ingredient> ingredients;
+    private  List<String> steps;
 
     public String getTitle() {
         return title;

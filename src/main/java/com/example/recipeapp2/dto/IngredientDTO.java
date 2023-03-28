@@ -6,14 +6,9 @@ public  record IngredientDTO (int id,String title, int number, String measure){
 
 
     public static IngredientDTO from(int id, Ingredient ingredient){
-        return new IngredientDTO (id, ingredient.getTitle(), ingredient.getNumber(), ingredient.getMeasure());
+        return new IngredientDTO (id, ingredient.title(), ingredient.number(), ingredient.measure());
 
     }
-
-
-
-
-
 
 }
 

@@ -2,6 +2,7 @@ package com.example.recipeapp2.service;
 
 import com.example.recipeapp2.model.Ingredient;
 import com.example.recipeapp2.model.Recipe;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -51,17 +52,28 @@ public  class FilesServiceImpl implements FilesService {
         }
         return false;
     }
-
-    @Override
-    public String readFromFile() {
-        try {
-            return Files.readString(Path.of(dataFilePath, dataFileName));//чтение
-        } catch (IOException e) {
+   @Override
+    public String readFromFile(){
+        try{
+            return Files.readString(Path.of(dataFilePath,dataFileName));//чтение
+        }catch(IOException e){
             throw new RuntimeException(e);
 
         }
 
     }
+
+    @Override
+    public void saveToFileIngredients(String json, Map<Integer, Ingredient> ingredients) {
+        try {
+            cleanIngredientFile();
+            Files.writeString(Path.of(ingredientFilePath, ingredientFileName), json);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+        // todo: надо реализовать
+
 
     @Override
     public void saveToFileRecipes(String json, Map<Integer, Recipe> recipes) {
@@ -73,16 +85,6 @@ public  class FilesServiceImpl implements FilesService {
         }
 
     }// todo: надо реализовать
-    @Override
-    public void saveToFileIngredients(String json, Map<Integer, Ingredient> ingredients) {
-        try {
-            cleanIngredientFile();
-            Files.writeString(Path.of(ingredientFilePath, ingredientFileName), json);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-    // todo: надо реализовать
 
     @Override
     public boolean cleanIngredientFile() {
@@ -127,6 +129,8 @@ public  class FilesServiceImpl implements FilesService {
 
         }
 
+    }
+
 
     }
-}
+
