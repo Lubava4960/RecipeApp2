@@ -24,10 +24,10 @@ public  class FilesServiceImpl implements FilesService {
     private String dataFileName;
 
 
-    @Value("${path.to.ingredient.file")
+    @Value("${path.to.ingredient.file}")
     private String ingredientFilePath;
 
-    @Value("${name.of.ingredient.file")
+    @Value("${name.of.ingredient.file}")
     private String ingredientFileName;
 
     @Override

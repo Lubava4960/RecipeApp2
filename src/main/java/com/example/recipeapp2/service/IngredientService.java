@@ -82,7 +82,7 @@ public class IngredientService {
     }
 
     private void readFromFile() throws IOException {
-        String json = filesService.readFromFile();
+        String json = filesService.readFromIngredientFile();
         try {
             new ObjectMapper().readValue(json, new TypeReference<HashMap<Integer, Ingredient>>() {
             });
