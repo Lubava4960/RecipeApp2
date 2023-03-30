@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 
 import javax.annotation.PostConstruct;
-import java.io.IOException;
+
 
 
 import java.util.*;
@@ -17,7 +17,7 @@ import java.util.*;
 @Service
 public class IngredientService {
    private static final String STORE_FILE_NAME = "ingredients";
-    private FilesService filesService;
+    private final FilesService filesService;
     private int idCounter = 0;
     private static final Map<Integer, Ingredient> ingredients = new HashMap<>();
 
@@ -71,17 +71,9 @@ public class IngredientService {
 
     }
 
-    private boolean saveToFile(String storeFileName, Map<Integer, Ingredient> ingredients) {
-        try {
-            String json = new ObjectMapper().writeValueAsString(IngredientService.ingredients);
-            filesService.saveToFileIngredients(json, ingredients);
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
-        }
-        return false;
-    }
 
-    private void readFromFile() throws IOException {
+
+    private void readFromFile() {
         String json = filesService.readFromIngredientFile();
         try {
             new ObjectMapper().readValue(json, new TypeReference<HashMap<Integer, Ingredient>>() {
@@ -91,9 +83,8 @@ public class IngredientService {
         }
     }
 
-
     @PostConstruct
-    private void init() throws IOException {
+    private void init() {
         readFromFile();
     }
 

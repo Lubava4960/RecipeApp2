@@ -28,14 +28,14 @@ Content-Type: application/json
 ###
 GET http://localhost:8080/recipe
 ###
-GET http://localhost:8080/recipe/1
+GET http://localhost:8080/recipe/4
 ###
 DELETE http://localhost:8080/recipe/0
 
 ###
 GET http://localhost:8080/ingredient
 ###
-GET http://localhost:8080/ingredient/1
+GET http://localhost:8080/ingredient/0
 
 ###
 POST http://localhost:8080/ingredient
@@ -43,12 +43,12 @@ Content-Type: application/json
 
 
 {
-"title": "картофель",
-"number": 1,
-"measure": "кг"
+"title": "сахар",
+"number": 50,
+"measure": "г"
 }
 
 ###
-DELETE http://localhost:8080/ingredient/0
+DELETE http://localhost:8080/ingredient/1
 
 

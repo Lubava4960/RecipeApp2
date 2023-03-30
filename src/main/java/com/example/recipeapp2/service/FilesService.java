@@ -11,23 +11,24 @@ import java.util.Map;
 public interface FilesService {
 
 
-    boolean cleanDataFile();
+    void cleanDataFile();
 
-    boolean saveToFileRecipes(String json);
+    boolean  saveToFileRecipes(String json);
 
     String readFromFile() throws IOException;
-
-
+    void saveToFileIngredients(String json, Map<Integer, Ingredient> ingredients);
     void saveToFileRecipes(String json, Map<Integer, Recipe> recipes);
 
-    void saveToFileIngredients(String json, Map<Integer, Ingredient> ingredients);
 
+    void cleanIngredientFile();
 
-    boolean cleanIngredientFile();
+    File getRecipeFile();
 
-    File getDataFile();
+    File getIngredientFile();
 
-    File getDataFile(String json);
+    File getRecipeFile(String json);
+
+    // todo: надо реализовать
     boolean saveToIngredientFile(String json);
 
     String readFromIngredientFile();

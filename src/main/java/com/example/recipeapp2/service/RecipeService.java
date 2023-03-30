@@ -18,7 +18,7 @@ import java.util.Map;
 @Service
 public class RecipeService {
     private static final String STORE_FILE_NAME = "recipes";
-    private FilesService filesService;
+    private final FilesService filesService;
 
     private int idCounter = 0;
     private static final Map<Integer, Recipe> recipes = new HashMap<>();
@@ -32,7 +32,7 @@ public class RecipeService {
     public RecipeDTO addRecipe(Recipe recipe) {
         int id = idCounter++;
         recipes.put(id, recipe);
-        saveToFile(STORE_FILE_NAME, recipes);
+        saveToFile();
         return RecipeDTO.from(id, recipe);
     }
 
@@ -58,6 +58,7 @@ public class RecipeService {
 
     public RecipeDTO deleteDyId(Integer id) {
         Recipe existingRecipe = recipes.remove(id);
+        filesService.saveToFileRecipes(STORE_FILE_NAME,recipes);
         if (existingRecipe == null) {
             throw new RecipeNotFoundException();
         }
@@ -72,14 +73,13 @@ public class RecipeService {
         return null;
     }
 
-    private boolean saveToFile(String storeFileName, Map<Integer, Recipe> recipes){
+    private void saveToFile(){
         try {
             String json = new ObjectMapper().writeValueAsString(RecipeService.recipes);
-            filesService.saveToFileRecipes(json, recipes);
+            filesService.saveToFileRecipes(json, RecipeService.recipes);
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }
-        return false;
     }
     private void readFromFile() throws IOException {
         String json = filesService.readFromFile();

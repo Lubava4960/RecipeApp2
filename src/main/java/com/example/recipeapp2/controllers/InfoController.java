@@ -1,6 +1,7 @@
 package com.example.recipeapp2.controllers;
 
 import com.example.recipeapp2.dto.InfoDTO;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

@@ -31,7 +31,7 @@ public  class FilesServiceImpl implements FilesService {
     private String ingredientFileName;
 
     @Override
-    public boolean cleanDataFile() {
+    public void cleanDataFile() {
         try {
             Path path = Path.of(dataFilePath, dataFileName);
             Files.deleteIfExists(path);
@@ -39,10 +39,10 @@ public  class FilesServiceImpl implements FilesService {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return false;
     }
 
-    @Override
+
+            @Override
     public boolean saveToFileRecipes(String json) {
         try {
             cleanDataFile();
@@ -64,7 +64,7 @@ public  class FilesServiceImpl implements FilesService {
     }
 
     @Override
-    public void saveToFileIngredients(String json, Map<Integer, Ingredient> ingredients) {
+    public void saveToFileIngredients(String json, Map<Integer, Ingredient> ingredient) {
         try {
             cleanIngredientFile();
             Files.writeString(Path.of(ingredientFilePath, ingredientFileName), json);
@@ -87,7 +87,7 @@ public  class FilesServiceImpl implements FilesService {
     }// todo: надо реализовать
 
     @Override
-    public boolean cleanIngredientFile() {
+    public void cleanIngredientFile() {
         try {
             Path path = Path.of(ingredientFilePath, ingredientFileName);
             Files.deleteIfExists(path);
@@ -95,18 +95,21 @@ public  class FilesServiceImpl implements FilesService {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return false;
     }
 
     @Override
-    public File getDataFile() {
-        return null;
+    public File getRecipeFile() {
+        return Path.of(dataFilePath, dataFileName).toFile();
     }
 
     @Override
-    public File getDataFile(String json) {
-        Path path = Path.of(dataFilePath, dataFileName);
-        return null;
+    public File getIngredientFile() {
+        return new File(ingredientFilePath+"/"+ingredientFileName);
+    }
+
+    @Override
+    public File getRecipeFile(String json) {
+        return new File(dataFilePath+"/"+ dataFileName);
     }
     // todo: надо реализовать
     @Override
