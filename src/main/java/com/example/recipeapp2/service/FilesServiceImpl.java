@@ -111,7 +111,17 @@ public  class FilesServiceImpl implements FilesService {
     public File getRecipeFile(String json) {
         return new File(dataFilePath+"/"+ dataFileName);
     }
-    // todo: надо реализовать
+    @Override
+   public Path greatTempFile(String suffix){
+        try{
+            return Files.createTempFile(Path.of(dataFilePath), "tempFile", suffix);
+        }catch (IOException e){
+            throw new RuntimeException(e);
+       }
+   }
+
+
+
     @Override
     public boolean saveToIngredientFile(String json) {
         try {

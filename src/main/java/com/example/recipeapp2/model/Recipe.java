@@ -31,4 +31,19 @@ public class Recipe {
         return steps;
     }
 
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setCookingTime(int cookingTime) {
+        this.cookingTime = cookingTime;
+    }
+
+    public void setIngredients(List<Ingredient> ingredients) {
+        this.ingredients = ingredients;
+    }
+
+    public void setSteps(List<String> steps) {
+        this.steps = steps;
+    }
 }

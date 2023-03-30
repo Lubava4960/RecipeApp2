@@ -2,6 +2,7 @@ package com.example.recipeapp2.service;
 
 import com.example.recipeapp2.dto.RecipeDTO;
 import com.example.recipeapp2.exception.RecipeNotFoundException;
+import com.example.recipeapp2.model.Ingredient;
 import com.example.recipeapp2.model.Recipe;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -17,11 +18,13 @@ import java.util.Map;
 
 @Service
 public class RecipeService {
-    private static final String STORE_FILE_NAME = "recipes";
+
+    public static Map<Integer, Ingredient> ingredients;
+    private  final String STORE_FILE_NAME = "recipes";
     private final FilesService filesService;
 
     private int idCounter = 0;
-    private static final Map<Integer, Recipe> recipes = new HashMap<>();
+    private static Map<Integer, Recipe> recipes = new HashMap<>();
 
     public RecipeService(FilesService filesService) {
 
@@ -47,7 +50,7 @@ public class RecipeService {
 
     public RecipeDTO updateRecipe(int id, Recipe recipe) {
         Recipe existingRecipe = recipes.get(id);
-        filesService.saveToFileRecipes(STORE_FILE_NAME,recipes);
+
         if (existingRecipe == null) {
             throw new RecipeNotFoundException();
         }

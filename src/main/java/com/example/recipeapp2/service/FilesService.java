@@ -6,6 +6,7 @@ import com.example.recipeapp2.model.Recipe;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.Map;
 
 public interface FilesService {
@@ -28,10 +29,13 @@ public interface FilesService {
 
     File getRecipeFile(String json);
 
+    Path greatTempFile(String suffix);
+
     // todo: надо реализовать
     boolean saveToIngredientFile(String json);
 
     String readFromIngredientFile();
+
 
 
 }
