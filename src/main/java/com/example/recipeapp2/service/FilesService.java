@@ -14,7 +14,8 @@ public interface FilesService {
 
     void cleanDataFile();
 
-    boolean  saveToFileRecipes(String json);
+
+    boolean saveToFileRecipes(String json);
 
     String readFromFile() throws IOException;
     void saveToFileIngredients(String json, Map<Integer, Ingredient> ingredients);
@@ -25,13 +26,13 @@ public interface FilesService {
 
     File getRecipeFile();
 
+
     File getIngredientFile();
 
     File getRecipeFile(String json);
 
     Path greatTempFile(String suffix);
 
-    // todo: надо реализовать
     boolean saveToIngredientFile(String json);
 
     String readFromIngredientFile();
