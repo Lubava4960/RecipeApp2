@@ -2,7 +2,6 @@ package com.example.recipeapp2.service;
 
 import com.example.recipeapp2.model.Ingredient;
 import com.example.recipeapp2.model.Recipe;
-
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -40,17 +39,15 @@ public  class FilesServiceImpl implements FilesService {
             e.printStackTrace();
         }
     }
-
-
-            @Override
-    public boolean saveToFileRecipes(String json) {
+    @Override
+    public void saveToFileRecipes(String json, Map<Integer, Recipe> recipes) {
         try {
             cleanDataFile();
             Files.writeString(Path.of(dataFilePath, dataFileName), json);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return false;
+
     }
    @Override
     public String readFromFile(){
@@ -64,7 +61,7 @@ public  class FilesServiceImpl implements FilesService {
     }
 
     @Override
-    public void saveToFileIngredients(String json, Map<Integer, Ingredient> ingredient) {
+    public void saveToFileIngredients(String json, Map<Integer, Ingredient> ingredients) {
         try {
             cleanIngredientFile();
             Files.writeString(Path.of(ingredientFilePath, ingredientFileName), json);
@@ -74,9 +71,8 @@ public  class FilesServiceImpl implements FilesService {
     }
         // todo: надо реализовать
 
-
     @Override
-    public void saveToFileRecipes(String json, Map<Integer, Recipe> recipes) {
+    public void saveToFileRecipes(String json) {
         try {
             cleanDataFile();
             Files.writeString(Path.of(dataFilePath, dataFileName), json);
@@ -109,8 +105,10 @@ public  class FilesServiceImpl implements FilesService {
 
     @Override
     public File getRecipeFile(String json) {
-        return new File(dataFilePath+"/"+ dataFileName);
+        return null;
     }
+
+
     @Override
    public Path greatTempFile(String suffix){
         try{

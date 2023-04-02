@@ -39,8 +39,7 @@ public class IngredientController {
             description = " Можно получить по id"
     )
     public IngredientDTO getIngredient(@PathVariable("id") int id){
-
-        return IngredientService.getIngredient(id);
+        return ingredientService.getIngredient(id);
     }
 
     @PostMapping

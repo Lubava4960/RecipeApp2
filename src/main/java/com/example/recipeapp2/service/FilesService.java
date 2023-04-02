@@ -1,7 +1,6 @@
 package com.example.recipeapp2.service;
 
 import com.example.recipeapp2.model.Ingredient;
-
 import com.example.recipeapp2.model.Recipe;
 
 import java.io.File;
@@ -14,13 +13,16 @@ public interface FilesService {
 
     void cleanDataFile();
 
-
-    boolean saveToFileRecipes(String json);
-
     String readFromFile() throws IOException;
+
     void saveToFileIngredients(String json, Map<Integer, Ingredient> ingredients);
+
     void saveToFileRecipes(String json, Map<Integer, Recipe> recipes);
 
+    // todo: надо реализовать
+
+
+    void saveToFileRecipes(String json);
 
     void cleanIngredientFile();
 
@@ -32,6 +34,7 @@ public interface FilesService {
     File getRecipeFile(String json);
 
     Path greatTempFile(String suffix);
+
 
     boolean saveToIngredientFile(String json);
 

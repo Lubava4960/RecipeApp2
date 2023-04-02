@@ -19,12 +19,11 @@ import java.util.Map;
 @Service
 public class RecipeService {
 
-    public static Map<Integer, Ingredient> ingredients;
     private  final String STORE_FILE_NAME = "recipes";
     private final FilesService filesService;
 
     private int idCounter = 0;
-    private static Map<Integer, Recipe> recipes = new HashMap<>();
+    private static final Map<Integer, Recipe> recipes = new HashMap<>();
 
     public RecipeService(FilesService filesService) {
 

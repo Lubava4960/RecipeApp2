@@ -5,6 +5,7 @@ import com.example.recipeapp2.model.Ingredient;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 import org.springframework.stereotype.Service;
 import javax.annotation.PostConstruct;
 import java.util.*;
@@ -14,21 +15,20 @@ public class IngredientService {
     private final String STORE_FILE_NAME = "json";
     private final FilesService filesService;
     private int idCounter = 0;
-    private static final Map<Integer, Ingredient> ingredients = new HashMap<>();
+    private  final Map<Integer, Ingredient> ingredients = new HashMap<>();
 
     public IngredientService(FilesService filesService) {
         this.filesService = filesService;
 
     }
 
+
     public IngredientDTO updateIngredient(int id, Ingredient ingredient) {
         Ingredient existingIngredient = ingredients.get(id);
-        filesService.saveToFileIngredients(STORE_FILE_NAME, ingredients);
-        if (existingIngredient == null) {
+               if (existingIngredient == null) {
             throw new IngredientNotFoundException();
         }
         ingredients.put(id, ingredient);
-        filesService.saveToFileIngredients(STORE_FILE_NAME, ingredients);
         return IngredientDTO.from(id, ingredient);
     }
 
@@ -39,12 +39,14 @@ public class IngredientService {
         return IngredientDTO.from(id, ingredient);
     }
 
-    public static IngredientDTO getIngredient(int id) {
+    public IngredientDTO getIngredient(int id) {
         Ingredient ingredient = ingredients.get(id);
         if (ingredient != null) {
             return IngredientDTO.from(id, ingredient);
+        }else {
+            return null;
         }
-        return null;
+
     }
 
     public IngredientDTO deleteById(int id) {
@@ -67,8 +69,8 @@ public class IngredientService {
     }
     public Map<Integer, Ingredient> saveToFileIngredient() {
         try {
-            String json = new ObjectMapper().writeValueAsString(IngredientService.ingredients);
-            filesService.saveToFileIngredients(json, IngredientService.ingredients);
+            String json = new ObjectMapper().writeValueAsString(ingredients);
+            filesService.saveToFileIngredients(STORE_FILE_NAME, ingredients);
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }
