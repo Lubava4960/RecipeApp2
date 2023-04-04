@@ -39,6 +39,7 @@ public  class FilesServiceImpl implements FilesService {
             e.printStackTrace();
         }
     }
+
     @Override
     public void saveToFileRecipes(String json, Map<Integer, Recipe> recipes) {
         try {
@@ -69,7 +70,7 @@ public  class FilesServiceImpl implements FilesService {
             e.printStackTrace();
         }
     }
-        // todo: надо реализовать
+
 
     @Override
     public void saveToFileRecipes(String json) {
@@ -80,7 +81,7 @@ public  class FilesServiceImpl implements FilesService {
             e.printStackTrace();
         }
 
-    }// todo: надо реализовать
+    }
 
     @Override
     public void cleanIngredientFile() {
@@ -95,6 +96,11 @@ public  class FilesServiceImpl implements FilesService {
 
     @Override
     public File getRecipeFile() {
+        return null;
+    }
+
+    @Override
+    public File getDataFile() {
         return Path.of(dataFilePath, dataFileName).toFile();
     }
 
@@ -140,6 +146,8 @@ public  class FilesServiceImpl implements FilesService {
 
     }
 
-
     }
+
+
+
 

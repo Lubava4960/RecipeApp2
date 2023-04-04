@@ -31,11 +31,16 @@ GET http://localhost:8080/recipe
 GET http://localhost:8080/recipe/0
 ###
 DELETE http://localhost:8080/recipe/0
+###
+GET http://localhost:8080/files/export
+
+
+
 
 ###
 GET http://localhost:8080/ingredient
 ###
-GET http://localhost:8080/ingredient/0
+GET http://localhost:8080/ingredient/3
 
 ###
 POST http://localhost:8080/ingredient
@@ -44,11 +49,13 @@ Content-Type: application/json
 
 {
 "title": "сахар",
-"number": 50,
+"number": 20,
 "measure": "г"
 }
 
 ###
 DELETE http://localhost:8080/ingredient/1
+
+
 
 

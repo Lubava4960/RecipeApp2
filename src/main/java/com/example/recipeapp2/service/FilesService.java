@@ -11,7 +11,7 @@ import java.util.Map;
 public interface FilesService {
 
 
-    void cleanDataFile();
+     void cleanDataFile();
 
     String readFromFile() throws IOException;
 
@@ -23,6 +23,7 @@ public interface FilesService {
 
 
     void saveToFileRecipes(String json);
+
 
     void cleanIngredientFile();
 
@@ -41,5 +42,5 @@ public interface FilesService {
     String readFromIngredientFile();
 
 
-
+    File getDataFile();
 }

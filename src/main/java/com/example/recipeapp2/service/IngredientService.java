@@ -8,6 +8,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.springframework.stereotype.Service;
 import javax.annotation.PostConstruct;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.*;
 
 @Service
@@ -16,10 +20,22 @@ public class IngredientService {
     private final FilesService filesService;
     private int idCounter = 0;
     private  final Map<Integer, Ingredient> ingredients = new HashMap<>();
+    private String ingredientFilePath;
+    private String ingredientFileName;
 
     public IngredientService(FilesService filesService) {
         this.filesService = filesService;
 
+    }
+
+    public void cleanIngredientFile() {
+        try {
+            Path path = Path.of(ingredientFilePath, ingredientFileName);
+            Files.deleteIfExists(path);
+            Files.createFile(path);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -67,18 +83,7 @@ public class IngredientService {
         return result;
 
     }
-    public Map<Integer, Ingredient> saveToFileIngredient() {
-        try {
-            String json = new ObjectMapper().writeValueAsString(ingredients);
-            filesService.saveToFileIngredients(STORE_FILE_NAME, ingredients);
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
-        }
-        return ingredients ;
-    }
-
-
-        private void readFromFileIngredient () {
+    private void readFromFileIngredient () {
             String json = filesService.readFromIngredientFile();
             try {
                 new ObjectMapper().readValue(json, new TypeReference<HashMap<Integer, Ingredient>>() {
@@ -87,11 +92,15 @@ public class IngredientService {
                 throw new RuntimeException(e);
             }
         }
+        public File getIngredientFile() {
+            return Path.of(ingredientFilePath, ingredientFileName).toFile();
+           }
 
         @PostConstruct
         private void init () {
             readFromFileIngredient();
         }
+
 
 
 }
