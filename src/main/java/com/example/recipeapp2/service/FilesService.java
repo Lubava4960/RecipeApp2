@@ -11,15 +11,13 @@ import java.util.Map;
 public interface FilesService {
 
 
-     void cleanDataFile();
+    void cleanDataFile();
 
     String readFromFile() throws IOException;
 
     void saveToFileIngredients(String json, Map<Integer, Ingredient> ingredients);
 
     void saveToFileRecipes(String json, Map<Integer, Recipe> recipes);
-
-    // todo: надо реализовать
 
 
     void saveToFileRecipes(String json);
@@ -30,7 +28,10 @@ public interface FilesService {
     File getRecipeFile();
 
 
+    File getDataFile();
+
     File getIngredientFile();
+
 
     File getRecipeFile(String json);
 
@@ -41,6 +42,4 @@ public interface FilesService {
 
     String readFromIngredientFile();
 
-
-    File getDataFile();
 }

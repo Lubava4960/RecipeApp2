@@ -24,7 +24,7 @@ class FilesController {
         this.ingredientService = ingredientService;
     }
 
-    @GetMapping(value = "/export")
+    @GetMapping(value = "/files/export/recipes")
 
     public ResponseEntity<InputStreamResource> downloadDataFile() throws FileNotFoundException {
         File file = filesService.getDataFile();
@@ -33,8 +33,9 @@ class FilesController {
             return ResponseEntity.ok()
                     .contentType(MediaType.APPLICATION_JSON)
                     .contentLength(file.length())//размер файла
-                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=\"RecipesLog.json\"")
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=\"RecipesLog.json\"")//Заголовок
                     .body(resource);
+
         } else {
 
             return ResponseEntity.noContent().build();
@@ -69,9 +70,9 @@ class FilesController {
     }
     @PostMapping(value = "/files/upload/ingredient",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<Void> uploadIngredientFile(@RequestParam MultipartFile file) {
-        File dataFile = ingredientService.getIngredientFile();
+        File ingredientFile = ingredientService.getIngredientFile();
         ingredientService.cleanIngredientFile();
-        try(FileOutputStream fos = new FileOutputStream(dataFile)){
+        try(FileOutputStream fos = new FileOutputStream(ingredientFile)){
             IOUtils.copy(file.getInputStream(), fos);
             return ResponseEntity.ok().build();
         } catch (Exception e) {

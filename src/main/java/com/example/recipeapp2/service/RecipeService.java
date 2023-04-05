@@ -31,9 +31,6 @@ public class RecipeService {
         this.filesService = filesService;
     }
 
-    public void cleanRecipesFile() {
-    }
-
 
     public RecipeDTO addRecipe(Recipe recipe) {
         int id = idCounter++;

@@ -48,14 +48,14 @@ Content-Type: application/json
 
 
 {
-"title": "сахар",
-"number": 20,
+"title": "мёд",
+"number": 10,
 "measure": "г"
 }
 
 ###
 DELETE http://localhost:8080/ingredient/1
 
-
-
+###
+GET  http://localhost:8080/files/export/Ingredient
 

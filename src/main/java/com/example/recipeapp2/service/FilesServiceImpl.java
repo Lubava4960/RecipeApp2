@@ -39,6 +39,11 @@ public  class FilesServiceImpl implements FilesService {
             e.printStackTrace();
         }
     }
+    @Override
+    public File getDataFile() {
+
+        return Path.of(dataFilePath, dataFileName).toFile();
+    }
 
     @Override
     public void saveToFileRecipes(String json, Map<Integer, Recipe> recipes) {
@@ -56,9 +61,7 @@ public  class FilesServiceImpl implements FilesService {
             return Files.readString(Path.of(dataFilePath,dataFileName));//чтение
         }catch(IOException e){
             throw new RuntimeException(e);
-
         }
-
     }
 
     @Override
@@ -70,7 +73,6 @@ public  class FilesServiceImpl implements FilesService {
             e.printStackTrace();
         }
     }
-
 
     @Override
     public void saveToFileRecipes(String json) {
@@ -96,18 +98,16 @@ public  class FilesServiceImpl implements FilesService {
 
     @Override
     public File getRecipeFile() {
-        return null;
-    }
 
-    @Override
-    public File getDataFile() {
         return Path.of(dataFilePath, dataFileName).toFile();
     }
 
-    @Override
-    public File getIngredientFile() {
-        return new File(ingredientFilePath+"/"+ingredientFileName);
-    }
+
+   @Override
+   public File getIngredientFile(){
+       return Path.of(ingredientFilePath, ingredientFileName).toFile();
+   }
+
 
     @Override
     public File getRecipeFile(String json) {
@@ -116,7 +116,7 @@ public  class FilesServiceImpl implements FilesService {
 
 
     @Override
-   public Path greatTempFile(String suffix){
+    public Path greatTempFile(String suffix){
         try{
             return Files.createTempFile(Path.of(dataFilePath), "tempFile", suffix);
         }catch (IOException e){
