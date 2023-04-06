@@ -5,6 +5,7 @@ import com.example.recipeapp2.model.Recipe;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.nio.file.Path;
 import java.util.Map;
 
@@ -42,4 +43,6 @@ public interface FilesService {
 
     String readFromIngredientFile();
 
+
+    void exportFromMemory(PrintWriter writer);
 }
