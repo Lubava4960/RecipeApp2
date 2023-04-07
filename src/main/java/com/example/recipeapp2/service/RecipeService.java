@@ -2,12 +2,14 @@ package com.example.recipeapp2.service;
 
 import com.example.recipeapp2.dto.RecipeDTO;
 import com.example.recipeapp2.exception.RecipeNotFoundException;
+import com.example.recipeapp2.model.Ingredient;
 import com.example.recipeapp2.model.Recipe;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -22,7 +24,7 @@ public class RecipeService {
 
 
     private int idCounter = 0;
-    private static final Map<Integer, Recipe> recipes = new HashMap<>();
+    static final Map<Integer, Recipe> recipes = new HashMap<>();
 
     public RecipeService(FilesService filesService, ObjectMapper objectMapper) {
 

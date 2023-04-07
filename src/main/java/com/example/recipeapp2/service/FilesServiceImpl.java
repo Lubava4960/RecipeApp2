@@ -12,6 +12,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Map;
 
+import static com.example.recipeapp2.service.RecipeService.recipes;
+
 @Service
 public  class FilesServiceImpl implements FilesService {
 
@@ -148,8 +150,22 @@ public  class FilesServiceImpl implements FilesService {
     }
 
     @Override
-    public void exportFromMemory(PrintWriter writer) {
-
+    public void exportFromMemory(PrintWriter writer){
+        for (Recipe recipe: recipes.values()){
+            writer.println(recipe.getTitle());
+            writer.println("Время приготовление: %d минут".formatted(recipe.getCookingTime()));
+            writer.println("Ингредиенты:");
+            for (Ingredient ingredient : recipe.getIngredients()){
+                writer.println("\t%s - %d %s".formatted(ingredient.getTitle(), ingredient.getNumber(),
+                        ingredient.getMeasure()));
+            }
+            writer.println("Инструкция приготовления:");
+            for (int i = 0; i<recipe.getSteps().size(); i++){
+                writer.println("%d %s".formatted(i + 1, recipe.getSteps().get(i)));
+            }
+            writer.println("");
+        }
+        writer.flush();
     }
 
 }

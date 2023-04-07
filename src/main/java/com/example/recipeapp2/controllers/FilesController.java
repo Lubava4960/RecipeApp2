@@ -30,7 +30,10 @@ class FilesController {
 
     public void downloadRecipes(HttpServletResponse response) throws IOException {
 
-        response.addHeader(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=\"RecipesLog.json\"");
+        ContentDisposition disposition = ContentDisposition.attachment()
+                .name("recipes.txt")
+                .build();
+        response.addHeader(HttpHeaders.CONTENT_DISPOSITION, disposition.toString());
         response.setContentType("text/plain");
         response.setCharacterEncoding(StandardCharsets.UTF_8.name());
         filesService.exportFromMemory(response.getWriter());
